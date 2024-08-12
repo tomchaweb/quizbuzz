@@ -10,6 +10,7 @@ import { questions } from "@/data";
 
 import React, { BaseSyntheticEvent, use, useEffect, useState } from "react";
 import NotFound from "../../not-found";
+import Link from "next/link";
 
 type categoryParams = {
   category: string
@@ -33,13 +34,14 @@ export default function Home({ params }: { params: categoryParams }) {
   const [quizEnded, setQuizEnded] = useState(false)
   const [score, setScore] = useState(0)
 
-
-
-  // get current question
-  useState(() => {
-    setCurrentQuestion(questions[questionNumber])
+  let filteredQuestions = questions.filter((question) => {
+    return question.category === params.category
   })
 
+  // get current question
+  useEffect(() => {
+    setCurrentQuestion(filteredQuestions[questionNumber])
+  }, [currentQuestion, questionNumber, filteredQuestions])
 
   // randomise order of answers
   useEffect(() => {
@@ -67,13 +69,13 @@ export default function Home({ params }: { params: categoryParams }) {
   // handle re-render for neq questions
   useEffect(() => {
     if (questionNumber) {
-      setCurrentQuestion(questions[questionNumber])
+      setCurrentQuestion(filteredQuestions[questionNumber])
 
       setQuestionAnswered(false)
       setGuessedCorrect(false)
       setGuessedAnswer("answer")
     }
-  }, [questionNumber, currentQuestion.question])
+  }, [questionNumber, currentQuestion.question, filteredQuestions])
 
   if (!validCategories.includes(params.category)) {
     return NotFound()
@@ -81,7 +83,7 @@ export default function Home({ params }: { params: categoryParams }) {
 
   return (
     <main className="mt-10">
-      <h1 className="w-fit mx-auto text-6xl font-extrabold underline tracking-tighter px-6 py-1 rounded-full border-yellow-400 border-8 bg-yellow-300">QuizBuzz {params.category}</h1>
+      <h1 className="w-fit mx-auto text-6xl font-extrabold underline tracking-tighter px-6 py-1 rounded-full border-yellow-400 border-8 bg-yellow-300">QuizBuzz</h1>
       <div className="w-fit mx-auto mt-10">
         <Question questionText={currentQuestion.question} />
       </div>
@@ -107,7 +109,7 @@ export default function Home({ params }: { params: categoryParams }) {
         : questionAnswered && <div className="w-fit mx-auto mt-10 text-center text-2xl font-bold"><span>Wrong! The correct answer was {currentCorrectAnswer}</span></div>
       }
       {questionAnswered && !quizEnded && <NextButton handleClick={() => {
-        if (questionNumber < questions.length - 1) {
+        if (questionNumber < filteredQuestions.length - 1) {
           setQuestionNumber(questionNumber + 1)
         }
         else {
@@ -115,8 +117,9 @@ export default function Home({ params }: { params: categoryParams }) {
         }
       }} />}
       {quizEnded &&
-        <div className="w-fit mx-auto mt-10 text-center text-2xl font-bold">
-          <span>That&apos;s the Quiz! You got {Math.round(score / questions.length * 100)}% correct</span>
+        <div className="w-fit mx-auto mt-10 text-center flex flex-col gap-4 text-2xl font-bold">
+          <span>That&apos;s the Quiz! You got {Math.round(score / filteredQuestions.length * 100)}% correct</span>
+          <Link href="/categories" className="px-6 py-1 rounded-full border-green-400 border-4 bg-green-300">Play Again</Link>
         </div>
       }
     </main>
