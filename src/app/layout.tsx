@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const quicksand = Quicksand({ subsets: ["latin"], display: "swap" })
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${quicksand.className} aliased bg-yellow-50`}>{children}</body>
+      <body className={`${quicksand.className} aliased bg-yellow-50`}><Navbar />{children}</body>
     </html>
   );
 }

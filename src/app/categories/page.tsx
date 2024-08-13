@@ -46,8 +46,8 @@ export default function Home() {
 
   return (
     <main className="mt-10">
-      <h1 className="w-fit mx-auto text-6xl font-extrabold underline tracking-tighter px-6 py-1 rounded-full border-yellow-400 border-8 bg-yellow-300">QuizBuzz</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 items-center place-items-center gap-2 mt-10 mx-24 md:mx-96">
+      <h1 className="w-fit mx-auto text-4xl md:text-6xl font-extrabold underline tracking-tighter px-6 py-1 rounded-full border-yellow-400 border-8 bg-yellow-300">Categories</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 items-center place-items-center md:gap-16 mt-10 mx-4 md:mx-40 lg:mx-60">
         {categoryInfo.map((category) => {
           return <CategoryBadge key={`${category.categoryName}-badge`} icon={category.icon} color={category.color} borderColor={category.borderColor} category={category.categoryName} />
         })}

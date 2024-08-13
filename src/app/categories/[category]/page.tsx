@@ -82,9 +82,9 @@ export default function Home({ params }: { params: categoryParams }) {
   }
 
   return (
-    <main className="mt-10">
-      <h1 className="w-fit mx-auto text-6xl font-extrabold underline tracking-tighter px-6 py-1 rounded-full border-yellow-400 border-8 bg-yellow-300">QuizBuzz</h1>
-      <div className="w-fit mx-auto mt-10">
+    <main className="mt-10 h-[100vh]">
+      <div className="w-fit mx-auto md:mt-20">
+        <span className="font-bold uppercase tracking-tighter">Question {questionNumber + 1}/{filteredQuestions.length}</span>
         <Question questionText={currentQuestion.question} />
       </div>
       <div className="w-fit mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -117,7 +117,7 @@ export default function Home({ params }: { params: categoryParams }) {
         }
       }} />}
       {quizEnded &&
-        <div className="w-fit mx-auto mt-10 text-center flex flex-col gap-4 text-2xl font-bold">
+        <div className="w-fit mx-auto mt-10 px-4 text-center flex flex-col gap-4 text-2xl font-bold">
           <span>That&apos;s the Quiz! You got {Math.round(score / filteredQuestions.length * 100)}% correct</span>
           <Link href="/categories" className="px-6 py-1 rounded-full border-green-400 border-4 bg-green-300">Play Again</Link>
         </div>
