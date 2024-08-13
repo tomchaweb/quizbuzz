@@ -1,3 +1,5 @@
+"use client"
+
 import { ChevronRight } from "lucide-react"
 
 export default function NextButton({ handleClick }: { handleClick: React.MouseEventHandler }) {

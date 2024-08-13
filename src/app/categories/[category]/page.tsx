@@ -51,6 +51,17 @@ export default function Home({ params }: { params: categoryParams }) {
 
   let currentCorrectAnswer = currentQuestion.correctAnswer
 
+  // handle re-render for neq questions
+  useEffect(() => {
+    if (questionNumber) {
+      setCurrentQuestion(filteredQuestions[questionNumber])
+
+      setQuestionAnswered(false)
+      setGuessedCorrect(false)
+      setGuessedAnswer("answer")
+    }
+  }, [questionNumber])
+
   const checkAnswer = (e: BaseSyntheticEvent) => {
     let currentGuess = e.target.textContent
 
@@ -65,17 +76,6 @@ export default function Home({ params }: { params: categoryParams }) {
       setQuestionAnswered(true)
     }
   }
-
-  // handle re-render for neq questions
-  useEffect(() => {
-    if (questionNumber) {
-      setCurrentQuestion(filteredQuestions[questionNumber])
-
-      setQuestionAnswered(false)
-      setGuessedCorrect(false)
-      setGuessedAnswer("answer")
-    }
-  }, [questionNumber, currentQuestion.question, filteredQuestions])
 
   if (!validCategories.includes(params.category)) {
     return NotFound()
