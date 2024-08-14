@@ -41,7 +41,7 @@ export default function Home({ params }: { params: categoryParams }) {
   // get current question
   useEffect(() => {
     setCurrentQuestion(filteredQuestions[questionNumber])
-  }, [currentQuestion, questionNumber, filteredQuestions])
+  }, [questionNumber])
 
   // randomise order of answers
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Home({ params }: { params: categoryParams }) {
   }
 
   return (
-    <main className="mt-10 h-[100vh]">
+    <main className="md:mt-10 h-[100vh]">
       <div className="w-fit mx-auto md:mt-20">
         <span className="font-bold uppercase tracking-tighter">Question {questionNumber + 1}/{filteredQuestions.length}</span>
         <Question questionText={currentQuestion.question} />
@@ -105,8 +105,8 @@ export default function Home({ params }: { params: categoryParams }) {
           )}
       </div>
       {guessedCorrect && questionAnswered
-        ? <div className="w-fit mx-auto mt-10 text-center text-2xl font-bold"><span>Yep! That&apos;s correct</span></div>
-        : questionAnswered && <div className="w-fit mx-auto mt-10 text-center text-2xl font-bold"><span>Wrong! The correct answer was {currentCorrectAnswer}</span></div>
+        ? <div className="w-fit mx-auto mt-5 p-2 text-center text-xl md:text-2xl font-bold"><span>Yep! That&apos;s correct</span></div>
+        : questionAnswered && <div className="w-fit mx-auto mt-5 p-2 text-center text-xl md:text-2xl font-bold"><span>Wrong! The correct answer was {currentCorrectAnswer}</span></div>
       }
       {questionAnswered && !quizEnded && <NextButton handleClick={() => {
         if (questionNumber < filteredQuestions.length - 1) {
@@ -117,9 +117,9 @@ export default function Home({ params }: { params: categoryParams }) {
         }
       }} />}
       {quizEnded &&
-        <div className="w-fit mx-auto mt-10 px-4 text-center flex flex-col gap-4 text-2xl font-bold">
-          <span>That&apos;s the Quiz! You got {Math.round(score / filteredQuestions.length * 100)}% correct</span>
-          <Link href="/categories" className="px-6 py-1 rounded-full border-green-400 border-4 bg-green-300">Play Again</Link>
+        <div className="w-fit mx-auto mt-5 px-4 text-center flex flex-col md:gap-4 text-2xl font-bold">
+          <span className="text-xl md:text-2xl">That&apos;s the Quiz! You got {Math.round(score / filteredQuestions.length * 100)}% correct</span>
+          <Link href="/categories" className="px-6 py-1 mt-2 rounded-full border-green-400 border-4 bg-green-300">Play Again</Link>
         </div>
       }
     </main>
