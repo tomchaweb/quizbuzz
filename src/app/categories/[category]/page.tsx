@@ -87,7 +87,7 @@ export default function Home({ params }: { params: categoryParams }) {
         <span className="font-bold uppercase tracking-tighter">Question {questionNumber + 1}/{filteredQuestions.length}</span>
         <Question questionText={currentQuestion.question} />
       </div>
-      <div className="w-fit mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="w-fit mx-auto mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         {!questionAnswered
           // if question is not answered
           ? currentAnswers.map((answer, i) => <Answer key={`${answer}${i}`} answerText={answer} handleClick={checkAnswer} />)
@@ -105,8 +105,8 @@ export default function Home({ params }: { params: categoryParams }) {
           )}
       </div>
       {guessedCorrect && questionAnswered
-        ? <div className="w-fit mx-auto mt-5 p-2 text-center text-xl md:text-2xl font-bold"><span>Yep! That&apos;s correct</span></div>
-        : questionAnswered && <div className="w-fit mx-auto mt-5 p-2 text-center text-xl md:text-2xl font-bold"><span>Wrong! The correct answer was {currentCorrectAnswer}</span></div>
+        ? <div className="w-fit mx-auto mt-2 p-2 text-center text-lg md:text-2xl font-bold"><span>Yep! That&apos;s correct</span></div>
+        : questionAnswered && <div className="w-fit mx-auto mt-2 p-2 text-center text-lg md:text-2xl font-bold"><span>Wrong! The correct answer was {currentCorrectAnswer}</span></div>
       }
       {questionAnswered && !quizEnded && <NextButton handleClick={() => {
         if (questionNumber < filteredQuestions.length - 1) {
@@ -117,7 +117,7 @@ export default function Home({ params }: { params: categoryParams }) {
         }
       }} />}
       {quizEnded &&
-        <div className="w-fit mx-auto mt-5 px-4 text-center flex flex-col md:gap-4 text-2xl font-bold">
+        <div className="w-fit mx-auto px-4 text-center flex flex-col md:gap-4 text-2xl font-bold">
           <span className="text-xl md:text-2xl">That&apos;s the Quiz! You got {Math.round(score / filteredQuestions.length * 100)}% correct</span>
           <Link href="/categories" className="px-6 py-1 mt-2 rounded-full border-green-400 border-4 bg-green-300">Play Again</Link>
         </div>

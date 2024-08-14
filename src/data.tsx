@@ -139,7 +139,7 @@ export const questions = [
   },
   {
     category: "history",
-    question: "What country did Mary, Queen of Scots grow up?s",
+    question: "What country did Mary, Queen of Scots grow up?",
     correctAnswer: "France",
     otherAnswers: ["Scotland", "England", "Spain"],
   },
